@@ -4,7 +4,7 @@
     "slug": "DoneWithIt-expo",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./app/assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./app/assets/splash.png",
@@ -22,12 +22,18 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./app/assets/icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.novaxylo.DoneWithItexpo"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./app/assets/icon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "9302016f-e577-4393-96a1-674840d19c49"
+      }
     }
   }
 }

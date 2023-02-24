@@ -14,8 +14,10 @@ const WelcomeScreen = ({ navigation }) => {
         <Text style={styles.tagline}>Sell What You Don't Need</Text>
       </View>
       <View style={styles.buttonContainer}>
-        <AppButton title='login' onSubmit={() => navigation.navigate('Login')} />
-        <AppButton title='register' color={colors.secondary} />
+        <AppButton title='login' onPress={() => navigation.navigate('Login')} />
+        <AppButton title='register' color={colors.secondary}
+          onPress={() => navigation.navigate('Register')}
+        />
       </View>
     </ImageBackground>
   );

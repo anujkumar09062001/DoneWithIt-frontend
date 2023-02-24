@@ -8,14 +8,18 @@ import axios from 'axios';
 import Screen from '../components/Screen';
 import colors from '../config/colors';
 import Card from '../components/Card';
+import ActivityIndicator from '../components/ActivityIndicator';
 
 const Listings = ({ navigation }) => {
   const [listings, setlistings] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const getListings = () => {
+    setLoading(true)
     axios.get('/listings')
       .then(res => {
         setlistings(res.data);
+        setLoading(false)
       })
       .catch(err => console.log(err));
   }
@@ -25,6 +29,7 @@ const Listings = ({ navigation }) => {
   }, []);
   return (
     <Screen>
+      <ActivityIndicator visible={loading} />
       <FlatList
         data={listings}
         keyExtractor={listing => listing.id.toString()}

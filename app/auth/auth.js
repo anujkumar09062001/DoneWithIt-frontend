@@ -7,9 +7,9 @@ import AuthContext from "./context";
 export default useAuth = () => {
   const { user, setUser } = useContext(AuthContext);
 
-  const login = (token) => {
+  const login = async (token) => {
     const user = jwtDecode(token);
-    SecureStore.setItemAsync('token', token);
+    await SecureStore.setItemAsync('token', token);
     setUser(user);
   };
 
