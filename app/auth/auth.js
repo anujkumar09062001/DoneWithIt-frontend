@@ -13,8 +13,8 @@ export default useAuth = () => {
     setUser(user);
   };
 
-  const logout = () => {
-    SecureStore.deleteItemAsync('token')
+  const logout = async () => {
+    await SecureStore.deleteItemAsync('token')
     setUser(null);
   };
 

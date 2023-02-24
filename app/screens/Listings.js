@@ -12,10 +12,9 @@ import ActivityIndicator from '../components/ActivityIndicator';
 
 const Listings = ({ navigation }) => {
   const [listings, setlistings] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const getListings = () => {
-    setLoading(true)
     axios.get('/listings')
       .then(res => {
         setlistings(res.data);
@@ -27,9 +26,9 @@ const Listings = ({ navigation }) => {
   useEffect(() => {
     getListings();
   }, []);
-  return (
-    <Screen>
-      <ActivityIndicator visible={loading} />
+  return (<>
+    <ActivityIndicator visible={loading} />
+    <Screen style={styles.screen}>
       <FlatList
         data={listings}
         keyExtractor={listing => listing.id.toString()}
@@ -45,10 +44,14 @@ const Listings = ({ navigation }) => {
         }
       />
     </Screen>
+  </>
   );
 };
 
 const styles = StyleSheet.create({
+  screen: {
+    // flex: 1
+  },
   container: {
     padding: 20,
     backgroundColor: colors.light
