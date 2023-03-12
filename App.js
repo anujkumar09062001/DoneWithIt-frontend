@@ -9,8 +9,8 @@ import AuthNavigator from './app/navigation/AuthNavigator';
 import navigationTheme from './app/navigation/navigationTheme';
 import storage from './app/auth/storage';
 
-// axios.defaults.baseURL = 'http://192.168.125.195:9000/api';
-axios.defaults.baseURL = 'https://donewithit-backend-51h5.onrender.com/api';
+axios.defaults.baseURL = 'http://192.168.32.195:1000';
+// axios.defaults.baseURL = 'https://donewithit-backend-51h5.onrender.com/api';
 
 export default function App() {
   const [user, setUser] = useState('');
@@ -44,7 +44,7 @@ export default function App() {
   return (
     <AuthContext.Provider value={{ user, setUser }}>
       <NavigationContainer theme={navigationTheme} onReady={onNavigationContainerReady}>
-        {user ? <AppNavigator /> : <AuthNavigator />}
+        {user ? <AppNavigator /> : <AppNavigator />}
       </NavigationContainer>
     </AuthContext.Provider>
   )

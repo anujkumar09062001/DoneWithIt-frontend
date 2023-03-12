@@ -7,7 +7,7 @@ const ListingDetails = ({ route }) => {
 
   return (
     <View style={styles.container}>
-      <Image source={{ uri: listing.images[0].url }} style={styles.image} />
+      <Image source={{ uri: listing.image }} style={styles.image} />
       <View style={styles.detailsContainer}>
         <Text style={styles.title}>{listing.title}</Text>
         <Text style={styles.subTitle}>${listing.price}</Text>

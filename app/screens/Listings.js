@@ -10,13 +10,16 @@ import colors from '../config/colors';
 import Card from '../components/Card';
 import ActivityIndicator from '../components/ActivityIndicator';
 
-const Listings = ({ navigation }) => {
+const Listings = ({ navigation, route }) => {
   const [listings, setlistings] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
 
   const getListings = () => {
-    axios.get('/listings')
+    axios.get('/listing')
       .then(res => {
+        console.log(res.data)
+        setRefreshing(false);
         setlistings(res.data);
         setLoading(false)
       })
@@ -25,23 +28,29 @@ const Listings = ({ navigation }) => {
 
   useEffect(() => {
     getListings();
-  }, []);
+  }, [route]);
+
   return (<>
     <ActivityIndicator visible={loading} />
     <Screen style={styles.screen}>
       <FlatList
         data={listings}
-        keyExtractor={listing => listing.id.toString()}
+        keyExtractor={listing => listing._id.toString()}
         renderItem={({ item }) =>
           <View style={styles.container}>
             <Card
-              image={item?.images[0]?.url}
+              image={item?.image}
               title={item?.title}
               subTitle={item?.price}
               onPress={() => navigation.navigate('ListingDetails', item)}
             />
           </View>
         }
+        refreshing={refreshing}
+        onRefresh={() => {
+          setRefreshing(true);
+          getListings();
+        }}
       />
     </Screen>
   </>
