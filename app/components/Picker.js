@@ -4,19 +4,21 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import colors from '../config/colors'
 import defautStyles from '../config/styles';
 import Screen from './Screen';
+import { useFormikContext } from 'formik';
 
-const Picker = ({ categories, handleSelect }) => {
+const Picker = ({ categories }) => {
   const [visible, setVisible] = useState(false)
-  const [item, setItem] = useState(null)
+
+  const { setFieldValue, values } = useFormikContext();
 
   return (
     <>
       <TouchableWithoutFeedback onPress={() => setVisible(true)}>
         <View style={styles.inputContainer}>
-          {item && <Text style={[defautStyles.text, { color: colors.dark }, styles.text]}>
-            {item.label}
+          {values.categoryId && <Text style={[defautStyles.text, { color: colors.dark }, styles.text]}>
+            {values.categoryId.label}
           </Text>}
-          {!item && <Text style={[defautStyles.text, { color: colors.medium }, styles.text]}>
+          {!values.categoryId && <Text style={[defautStyles.text, { color: colors.medium }, styles.text]}>
             Category
           </Text>}
           <MaterialCommunityIcons
@@ -40,8 +42,7 @@ const Picker = ({ categories, handleSelect }) => {
               }}>
                 <TouchableOpacity onPress={() => {
                   setVisible(false);
-                  setItem(item);
-                  handleSelect(item);
+                  setFieldValue('categoryId', item)
                 }}>
                   <View style={[{ backgroundColor: item.backgroundColor }, styles.icon]}>
                     <MaterialCommunityIcons name={item.icon} size={25}

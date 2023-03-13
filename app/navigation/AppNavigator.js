@@ -4,6 +4,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import ListingNavigator from './ListingNavigator';
 import AccountNavigator from './AccountNavigator';
 import AddListing from '../screens/AddListing';
+import AddListings from '../screens/AddListings';
 
 const Tab = createBottomTabNavigator();
 
@@ -20,7 +21,7 @@ const AppNavigator = () => {
             size={size}
           />
       }} />
-      <Tab.Screen name="AddListing" component={AddListing} options={{
+      <Tab.Screen name="AddListing" component={AddListings} options={{
         tabBarIcon: ({ color, size }) =>
           <MaterialCommunityIcons
             name="plus-circle"

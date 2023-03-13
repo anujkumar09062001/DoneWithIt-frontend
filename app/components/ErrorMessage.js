@@ -2,7 +2,9 @@ import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import colors from '../config/colors';
 
-const ErrorMessage = ({ message }) => {
+const ErrorMessage = ({ message, visible }) => {
+  if (!visible || !message)
+    return null;
   return (
     <View>
       <Text style={styles.error}>{message}</Text>

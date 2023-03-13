@@ -18,7 +18,6 @@ const Listings = ({ navigation, route }) => {
   const getListings = () => {
     axios.get('/listing')
       .then(res => {
-        console.log(res.data)
         setRefreshing(false);
         setlistings(res.data);
         setLoading(false)
