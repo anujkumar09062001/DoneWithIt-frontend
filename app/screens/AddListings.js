@@ -1,5 +1,5 @@
-import React from 'react'
-import { StyleSheet, Text } from 'react-native'
+import React, { useState } from 'react'
+import { StyleSheet, Keyboard } from 'react-native'
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import Screen from '../components/Screen'
@@ -9,6 +9,7 @@ import AppImagePicker from '../components/AppImagePicker';
 import Picker from '../components/Picker';
 import ErrorMessage from '../components/ErrorMessage';
 import axios from 'axios';
+import UploadScreen from '../components/UploadScreen';
 
 const categories = [
   {
@@ -76,8 +77,13 @@ const listingSchema = Yup.object().shape({
 });
 
 const AddListings = ({ navigation }) => {
+  const [progress, setProgress] = useState(0);
+  const [visible, setVisible] = useState(false);
 
   const onSubmit = (values, { resetForm }) => {
+    Keyboard.dismiss();
+    setProgress(0);
+    setVisible(true);
     const { title, price, image, categoryId, description } = values;
     const data = new FormData();
     data.append('image', {
@@ -89,60 +95,71 @@ const AddListings = ({ navigation }) => {
     data.append('price', price);
     data.append('categoryId', categoryId.value);
     data.append('description', description);
-    axios.post('/listing', data)
+    axios.post('/listing', data, {
+      onUploadProgress: (progress) => setProgress(progress.loaded / progress.total)
+    })
       .then(() => {
         resetForm();
         navigation.navigate('Listings', { refresh: true });
       })
-      .catch(err => console.log(err));
+      .catch(() => alert('Failed to save data!'));
+  };
+
+  const handleDone = () => {
+    setTimeout(() => {
+      setVisible(false);
+    }, 1000);
   }
 
   return (
-    <Formik
-      initialValues={{
-        title: '',
-        price: '',
-        categoryId: '',
-        description: '',
-        image: null
-      }}
-      validationSchema={listingSchema}
-      onSubmit={onSubmit}
-    >
-      {({ values, handleChange, handleSubmit, errors, touched, handleBlur }) => (
-        <Screen style={styles.container}>
-          <AppImagePicker />
-          <ErrorMessage message={errors['image']} visible={touched['image']} />
-          <AppTextInput
-            value={values.title}
-            onChangeText={handleChange('title')}
-            placeholder='Title'
-            onBlur={handleBlur('title')}
-          />
-          <ErrorMessage message={errors['title']} visible={touched['title']} />
-          <AppTextInput
-            value={values.price}
-            onChangeText={handleChange('price')}
-            placeholder='Price'
-            keyboardType='numeric'
-            onBlur={handleBlur('price')}
-          />
-          <ErrorMessage message={errors['price']} visible={touched['price']} />
-          <Picker
-            categories={categories}
-          />
-          <ErrorMessage message={errors['categoryId']} visible={touched['categoryId']} />
-          <AppTextInput
-            value={values.description}
-            onChangeText={handleChange('description')}
-            placeholder='Description'
-            onBlur={handleBlur('description')}
-          />
-          <ErrorMessage message={errors['description']} visible={touched['description']} />
-          <AppButton title='Submit' onPress={handleSubmit} />
-        </Screen>
-      )}
-    </Formik>
+    <Screen style={styles.container}>
+      <UploadScreen visible={visible} onDone={handleDone} progress={progress} />
+      <Formik
+        initialValues={{
+          title: '',
+          price: '',
+          categoryId: '',
+          description: '',
+          image: null
+        }}
+        validationSchema={listingSchema}
+        onSubmit={onSubmit}
+      >
+        {({ values, handleChange, handleSubmit, errors, touched, handleBlur }) => (
+          <>
+            <AppImagePicker />
+            <ErrorMessage message={errors['image']} visible={touched['image']} />
+            <AppTextInput
+              value={values.title}
+              onChangeText={handleChange('title')}
+              placeholder='Title'
+              onBlur={handleBlur('title')}
+            />
+            <ErrorMessage message={errors['title']} visible={touched['title']} />
+            <AppTextInput
+              value={values.price}
+              onChangeText={handleChange('price')}
+              placeholder='Price'
+              keyboardType='numeric'
+              onBlur={handleBlur('price')}
+            />
+            <ErrorMessage message={errors['price']} visible={touched['price']} />
+            <Picker
+              categories={categories}
+            />
+            <ErrorMessage message={errors['categoryId']} visible={touched['categoryId']} />
+            <AppTextInput
+              value={values.description}
+              onChangeText={handleChange('description')}
+              placeholder='Description'
+              onBlur={handleBlur('description')}
+            />
+            <ErrorMessage message={errors['description']} visible={touched['description']} />
+            <AppButton title='Submit' onPress={handleSubmit} />
+          </>
+        )}
+      </Formik>
+    </Screen>
   )
 };
 

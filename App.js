@@ -9,7 +9,7 @@ import AuthNavigator from './app/navigation/AuthNavigator';
 import navigationTheme from './app/navigation/navigationTheme';
 import storage from './app/auth/storage';
 
-axios.defaults.baseURL = 'http://192.168.37.195:1000';
+axios.defaults.baseURL = 'https://backend-dwi.onrender.com';
 // axios.defaults.baseURL = 'https://donewithit-backend-51h5.onrender.com/api';
 
 export default function App() {
