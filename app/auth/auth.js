@@ -3,12 +3,14 @@ import jwtDecode from "jwt-decode";
 import * as SecureStore from 'expo-secure-store';
 
 import AuthContext from "./context";
+import axios from "axios";
 
-export default useAuth = () => {
+export default function useAuth() {
   const { user, setUser } = useContext(AuthContext);
 
-  const login = async (token) => {
+  async function login(token) {
     const user = jwtDecode(token);
+    axios.defaults.headers.common["JWT"] = token;
     await SecureStore.setItemAsync('token', token);
     setUser(user);
   };

@@ -11,7 +11,12 @@ const getToken = async () => {
 
 const getUser = async () => {
   const token = await getToken();
-  return (token) ? jwtDecode(token) : null;
+  if (!token) return null;
+  const decoded = jwtDecode(token);
+  return {
+    "token": token,
+    "user": decoded
+  };
 };
 
 export default { getToken, getUser };

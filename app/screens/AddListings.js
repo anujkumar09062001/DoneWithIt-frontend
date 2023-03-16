@@ -100,15 +100,13 @@ const AddListings = ({ navigation }) => {
     })
       .then(() => {
         resetForm();
-        navigation.navigate('Listings', { refresh: true });
       })
       .catch(() => alert('Failed to save data!'));
   };
 
   const handleDone = () => {
-    setTimeout(() => {
-      setVisible(false);
-    }, 1000);
+    setVisible(false);
+    navigation.navigate('Listings', { refresh: true });
   }
 
   return (
@@ -165,8 +163,7 @@ const AddListings = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 10,
-    marginTop: 20
+    padding: 10
   },
 })
 

@@ -9,7 +9,8 @@ import AuthNavigator from './app/navigation/AuthNavigator';
 import navigationTheme from './app/navigation/navigationTheme';
 import storage from './app/auth/storage';
 
-axios.defaults.baseURL = 'https://backend-dwi.onrender.com';
+axios.defaults.baseURL = 'https://backend-dwi.onrender.com/api';
+// axios.defaults.baseURL = 'http://192.168.220.195:7900';
 // axios.defaults.baseURL = 'https://donewithit-backend-51h5.onrender.com/api';
 
 export default function App() {
@@ -17,8 +18,12 @@ export default function App() {
   const [isReady, setIsReady] = useState(false);
 
   const restoreUser = async () => {
-    const user = await storage.getUser();
-    setUser(user);
+    const userData = await storage.getUser();
+    if (userData) {
+      const { token, user } = userData;
+      axios.defaults.headers.common["JWT"] = token;
+      setUser(user);
+    }
   }
 
   const appReady = async () => {
@@ -44,7 +49,7 @@ export default function App() {
   return (
     <AuthContext.Provider value={{ user, setUser }}>
       <NavigationContainer theme={navigationTheme} onReady={onNavigationContainerReady}>
-        {user ? <AppNavigator /> : <AppNavigator />}
+        {user ? <AppNavigator /> : <AuthNavigator />}
       </NavigationContainer>
     </AuthContext.Provider>
   )
