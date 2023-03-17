@@ -9,26 +9,42 @@ const AppImagePicker = () => {
 
   const { setFieldValue, values } = useFormikContext();
 
-  const handlePress = () => {
-    if (!values.image) selectImage();
-    else Alert.alert("Delete", "Are you sure you want to delete this image?", [
-      { text: "Yes", onPress: () => setFieldValue('image', null) },
-      { text: "No" },
-    ])
+  const handlePress = async () => {
+    if (!values.image) {
+      const result = await ImagePicker.requestMediaLibraryPermissionsAsync();
+      if (!result.granted) {
+        return alert("You've refused to allow this appp to access your photos!");
+      }
+      selectImage();
+    }
+    else {
+      Alert.alert("Delete", "Are you sure you want to delete this image?", [
+        { text: "Yes", onPress: () => setFieldValue('image', null) },
+        { text: "No" },
+      ])
+    }
   }
 
   const selectImage = async () => {
-    try {
-      const result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.Images,
-        quality: 0.5
+    ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    })
+      .then((res) => {
+        setFieldValue('image', res.assets[0].uri);
       })
-      if (!result.canceled) {
-        setFieldValue('image', result.assets[0].uri)
-      }
-    } catch (error) {
-      console.log('Error reading an image', error);
-    }
+      .catch((err) => alert('Failed to Select an image'));
+    // try {
+    //   // if (!result.canceled) {
+    //   //   setFieldValue('image', result.assets[0].uri)
+    //   // }
+    //   alert('Error result');
+    // } catch (error) {
+    //   alert('Error reading an image');
+    //   console.log('Error reading an image', error);
+    // }
   }
 
   return (

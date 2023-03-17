@@ -101,7 +101,10 @@ const AddListings = ({ navigation }) => {
       .then(() => {
         resetForm();
       })
-      .catch(() => alert('Failed to save data!'));
+      .catch((err) => {
+        setVisible(false);
+        alert(err.response)
+      });
   };
 
   const handleDone = () => {
