@@ -1,10 +1,12 @@
 import React from 'react'
 import Constants from 'expo-constants';
 import { StyleSheet, SafeAreaView } from 'react-native'
+import { StatusBar } from 'expo-status-bar';
 
 const Screen = ({ children, style }) => {
   return (
     <SafeAreaView style={[styles.screen, { ...style }]}>
+      <StatusBar style="dark" />
       {children}
     </SafeAreaView>
   )

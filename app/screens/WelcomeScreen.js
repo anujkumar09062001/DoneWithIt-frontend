@@ -1,25 +1,28 @@
 import React from 'react';
 import { Image, ImageBackground, StyleSheet, Text, View } from 'react-native';
 import AppButton from '../components/AppButton';
+import Screen from '../components/Screen';
 import colors from '../config/colors';
 
 const WelcomeScreen = ({ navigation }) => {
   return (
-    <ImageBackground
-      source={require('../assets/background.jpg')}
-      style={styles.background}
-    >
-      <View style={styles.logoContainer}>
-        <Image source={require('../assets/logo-red.png')} style={styles.logo} />
-        <Text style={styles.tagline}>Sell What You Don't Need</Text>
-      </View>
-      <View style={styles.buttonContainer}>
-        <AppButton title='login' onPress={() => navigation.navigate('Login')} />
-        <AppButton title='register' color={colors.secondary}
-          onPress={() => navigation.navigate('Register')}
-        />
-      </View>
-    </ImageBackground>
+    <Screen>
+      <ImageBackground
+        source={require('../assets/background.jpg')}
+        style={styles.background}
+      >
+        <View style={styles.logoContainer}>
+          <Image source={require('../assets/logo-red.png')} style={styles.logo} />
+          <Text style={styles.tagline}>Sell What You Don't Need</Text>
+        </View>
+        <View style={styles.buttonContainer}>
+          <AppButton title='login' onPress={() => navigation.navigate('Login')} />
+          <AppButton title='register' color={colors.secondary}
+            onPress={() => navigation.navigate('Register')}
+          />
+        </View>
+      </ImageBackground>
+    </Screen>
   );
 }
 

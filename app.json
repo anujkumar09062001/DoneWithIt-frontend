@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "DoneWithIt-expo",
-    "slug": "donewithit",
+    "slug": "DoneWithIt",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./app/assets/icon.png",
@@ -12,8 +12,7 @@
         {
           "photosPermission": "The app accesses your photos to let you share them with your friends."
         }
-      ],
-      "sentry-expo"
+      ]
     ],
     "splash": {
       "image": "./app/assets/splash.png",
@@ -41,7 +40,7 @@
     },
     "extra": {
       "eas": {
-        "projectId": "9bb3e8c7-1ef3-427d-80b9-7c2041ce9087"
+        "projectId": "ef946163-8dec-473f-80f1-a05819c11775"
       }
     }
   }

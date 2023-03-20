@@ -60,9 +60,10 @@ const Login = () => {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 15,
+    paddingHorizontal: 15,
     flex: 1,
-    justifyContent: 'center'
+    justifyContent: 'center',
+    paddingTop: 0
   },
   icon: {
     width: 100,

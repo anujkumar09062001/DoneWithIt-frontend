@@ -7,6 +7,7 @@ import AppTextInput from '../components/AppTextInput';
 import useAuth from '../auth/auth';
 import ErrorMessage from '../components/ErrorMessage';
 import ActivityIndicator from '../components/ActivityIndicator';
+import Screen from '../components/Screen';
 
 const Registration = () => {
   const [name, setName] = useState('')
@@ -37,7 +38,7 @@ const Registration = () => {
   };
 
   return (
-    <>
+    <Screen style={styles.screen}>
       <ActivityIndicator visible={loading} />
       <View style={styles.container}>
         {error && <ErrorMessage message={error} visible={visible} />}
@@ -59,15 +60,18 @@ const Registration = () => {
         />
         <AppButton title='Register' onPress={onSubmit} />
       </View>
-    </>
+    </Screen>
   )
 };
 
 const styles = StyleSheet.create({
+  screen: {
+    paddingTop: 0
+  },
   container: {
     flex: 1,
-    marginTop: 30,
-    padding: 15
+    paddingHorizontal: 15,
+    justifyContent: 'center'
   }
 })
 

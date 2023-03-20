@@ -96,14 +96,18 @@ const AddListings = ({ navigation }) => {
     data.append('categoryId', categoryId.value);
     data.append('description', description);
     axios.post('/listing', data, {
-      onUploadProgress: (progress) => setProgress(progress.loaded / progress.total)
+      onUploadProgress: (progress) => setProgress(progress.loaded / progress.total),
+      headers: {
+        accept: 'application/json',
+        'content-type': 'multipart/form-data'
+      }
     })
       .then(() => {
         resetForm();
       })
       .catch((err) => {
         setVisible(false);
-        alert(err.response)
+        console.log(err, data);
       });
   };
 
@@ -166,7 +170,8 @@ const AddListings = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 10
+    paddingHorizontal: 10.,
+    marginTop: 10
   },
 })
 
