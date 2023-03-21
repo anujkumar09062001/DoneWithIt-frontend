@@ -147,6 +147,7 @@ const AddListings = ({ navigation }) => {
               placeholder='Price'
               keyboardType='numeric'
               onBlur={handleBlur('price')}
+              width={150}
             />
             <ErrorMessage message={errors['price']} visible={touched['price']} />
             <Picker
