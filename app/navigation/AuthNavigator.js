@@ -1,9 +1,8 @@
 import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import WelcomeScreen from '../screens/WelcomeScreen';
-import Login from '../screens/Login';
 import LoginFormik from '../screens/LoginFormik';
-import Registration from '../screens/Registration';
+import RegistrationFormik from '../screens/RegistrationFormik';
 
 const Stack = createNativeStackNavigator();
 
@@ -16,7 +15,7 @@ const AuthNavigator = () => {
       <Stack.Screen name='Login' component={LoginFormik} options={{
         headerTransparent: true
       }} />
-      <Stack.Screen name='Register' component={Registration} options={{
+      <Stack.Screen name='Register' component={RegistrationFormik} options={{
         headerTransparent: true
       }} />
     </Stack.Navigator>
