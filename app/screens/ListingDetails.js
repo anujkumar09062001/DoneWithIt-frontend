@@ -21,7 +21,7 @@ const ListingDetails = ({ route }) => {
 
 const styles = StyleSheet.create({
   screenContainer: {
-    paddingTop: 0
+    // marginTop: 10
   },
   container: {
     backgroundColor: colors.white,
