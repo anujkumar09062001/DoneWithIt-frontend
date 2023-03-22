@@ -41,6 +41,7 @@ const Listings = ({ navigation, route }) => {
               image={item?.image}
               title={item?.title}
               subTitle={item?.price}
+              author={item?.author}
               onPress={() => navigation.navigate('ListingDetails', item)}
             />
           </View>

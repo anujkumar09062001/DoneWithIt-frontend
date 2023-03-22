@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { StyleSheet, Keyboard } from 'react-native'
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import storage from '../auth/storage';
+
 import Screen from '../components/Screen'
 import AppTextInput from '../components/AppTextInput';
 import AppButton from '../components/AppButton';
@@ -78,7 +80,17 @@ const listingSchema = Yup.object().shape({
 
 const AddListings = ({ navigation }) => {
   const [progress, setProgress] = useState(0);
+  const [user, setUser] = useState({});
   const [visible, setVisible] = useState(false);
+
+  const getUserInfo = async () => {
+    const { user } = await storage.getUser();
+    setUser(user);
+  };
+
+  useEffect(() => {
+    getUserInfo();
+  }, []);
 
   const onSubmit = (values, { resetForm }) => {
     Keyboard.dismiss();
@@ -95,6 +107,9 @@ const AddListings = ({ navigation }) => {
     data.append('price', price);
     data.append('categoryId', categoryId.value);
     data.append('description', description);
+    data.append('_id', user._id);
+    data.append('name', user.name);
+    data.append('email', user.email);
     axios.post('/listing', data, {
       onUploadProgress: (progress) => setProgress(progress.loaded / progress.total),
       headers: {

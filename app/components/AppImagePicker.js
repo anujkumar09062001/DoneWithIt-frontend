@@ -28,7 +28,6 @@ const AppImagePicker = () => {
   const selectImage = async () => {
     ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
-      allowsEditing: true,
       aspect: [4, 3],
       quality: 1,
     })
@@ -36,15 +35,6 @@ const AppImagePicker = () => {
         setFieldValue('image', res.assets[0].uri);
       })
       .catch((err) => alert('Failed to Select an image'));
-    // try {
-    //   // if (!result.canceled) {
-    //   //   setFieldValue('image', result.assets[0].uri)
-    //   // }
-    //   alert('Error result');
-    // } catch (error) {
-    //   alert('Error reading an image');
-    //   console.log('Error reading an image', error);
-    // }
   }
 
   return (
