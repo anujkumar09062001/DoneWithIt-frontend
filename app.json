@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "DoneWithIt-expo",
-    "slug": "DoneWithIt",
+    "slug": "donewithit",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./app/assets/icon.png",
@@ -40,7 +40,7 @@
     },
     "extra": {
       "eas": {
-        "projectId": "ef946163-8dec-473f-80f1-a05819c11775"
+        "projectId": "fb1c8585-6584-4f09-b48f-7b978cd9ac4a"
       }
     }
   }
