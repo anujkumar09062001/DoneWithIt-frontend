@@ -22,7 +22,7 @@ const ListingDetails = ({ route }) => {
           <ListItem IconComponent={
             <View style={styles.icon}>
               <MaterialCommunityIcons name='account-circle'
-                size={30} color={colors.white} />
+                size={25} color={colors.white} />
             </View>
           }
             title={listing.author.name} subtitle={listing.author.email} />

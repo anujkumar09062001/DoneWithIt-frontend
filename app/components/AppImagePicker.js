@@ -28,7 +28,6 @@ const AppImagePicker = () => {
   const selectImage = async () => {
     ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
-      aspect: [4, 3],
       quality: 1,
     })
       .then((res) => {

@@ -20,15 +20,19 @@ const AccountScreen = () => {
           <ListItem
             title={user.name}
             subtitle={user.email}
-            image={require('../assets/mosh.jpg')}
+            IconComponent={
+              <View style={styles.iconUser}>
+                <MaterialCommunityIcons name='account-circle'
+                  size={25} color={colors.white} />
+              </View>
+            }
           />
         </View>
         <View style={{ marginTop: 20 }}>
           <ListItem
-            // image={require('../assets/mosh.jpg')}
             title='Logout'
             IconComponent={
-              <View style={styles.icon}>
+              <View style={styles.iconLogout}>
                 <MaterialCommunityIcons name='logout'
                   size={25} color={colors.white} />
               </View>
@@ -47,7 +51,11 @@ const styles = StyleSheet.create({
     backgroundColor: colors.light,
     marginTop: 10
   },
-  icon: {
+  iconUser: {
+    backgroundColor: colors.primary,
+    padding: 10
+  },
+  iconLogout: {
     backgroundColor: '#ffe66d',
     padding: 10
   }
